@@ -16,9 +16,9 @@ class TeamProfileTeamProfile(BaseModel):
     personal_best_info: Optional[
         List[Optional["TeamProfileTeamProfilePersonalBestInfo"]]
     ] = Field(alias="personalBestInfo")
-    personal_bests: Optional[List[Optional["TeamProfileTeamProfilePersonalBests"]]] = (
-        Field(alias="personalBests")
-    )
+    personal_bests: Optional[
+        List[Optional["TeamProfileTeamProfilePersonalBests"]]
+    ] = Field(alias="personalBests")
     personal_honour_info: Optional[
         List[Optional["TeamProfileTeamProfilePersonalHonourInfo"]]
     ] = Field(alias="personalHonourInfo")

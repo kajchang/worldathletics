@@ -115,6 +115,7 @@ class GetWawCompetitionGetWawCompetitionNextEventPage(BaseModel):
         List[Optional["GetWawCompetitionGetWawCompetitionNextEventPageContentModules"]]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional["GetWawCompetitionGetWawCompetitionNextEventPageCampaign"]
 
@@ -198,6 +199,7 @@ class GetWawCompetitionGetWawCompetitionNextEventPageEventPage(BaseModel):
         ]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional[
         "GetWawCompetitionGetWawCompetitionNextEventPageEventPageCampaign"
@@ -1063,6 +1065,7 @@ class GetWawCompetitionGetWawCompetitionNextEventPageContentModulesRelatedArticl
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -1167,6 +1170,7 @@ class GetWawCompetitionGetWawCompetitionNextEventPageContentModulesRelatedEvents
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -1351,6 +1355,7 @@ class GetWawCompetitionGetWawCompetitionNextEventPageContentModulesMinisitePage(
         ]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional[
         "GetWawCompetitionGetWawCompetitionNextEventPageContentModulesMinisitePageCampaign"
@@ -1679,6 +1684,7 @@ class GetWawCompetitionGetWawCompetitionNextEventPageContentModulesBannersPage(
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -1868,6 +1874,7 @@ class GetWawCompetitionGetWawCompetitionLastEventPage(BaseModel):
         List[Optional["GetWawCompetitionGetWawCompetitionLastEventPageContentModules"]]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional["GetWawCompetitionGetWawCompetitionLastEventPageCampaign"]
 
@@ -1951,6 +1958,7 @@ class GetWawCompetitionGetWawCompetitionLastEventPageEventPage(BaseModel):
         ]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional[
         "GetWawCompetitionGetWawCompetitionLastEventPageEventPageCampaign"
@@ -2816,6 +2824,7 @@ class GetWawCompetitionGetWawCompetitionLastEventPageContentModulesRelatedArticl
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -2920,6 +2929,7 @@ class GetWawCompetitionGetWawCompetitionLastEventPageContentModulesRelatedEvents
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -3104,6 +3114,7 @@ class GetWawCompetitionGetWawCompetitionLastEventPageContentModulesMinisitePage(
         ]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional[
         "GetWawCompetitionGetWawCompetitionLastEventPageContentModulesMinisitePageCampaign"
@@ -3432,6 +3443,7 @@ class GetWawCompetitionGetWawCompetitionLastEventPageContentModulesBannersPage(
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -3567,6 +3579,7 @@ class GetWawCompetitionGetWawCompetitionPage(BaseModel):
         List[Optional["GetWawCompetitionGetWawCompetitionPageContentModules"]]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional["GetWawCompetitionGetWawCompetitionPageCampaign"]
 
@@ -3644,6 +3657,7 @@ class GetWawCompetitionGetWawCompetitionPageEventPage(BaseModel):
         List[Optional["GetWawCompetitionGetWawCompetitionPageEventPageContentModules"]]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional["GetWawCompetitionGetWawCompetitionPageEventPageCampaign"]
 
@@ -3716,6 +3730,7 @@ class GetWawCompetitionGetWawCompetitionPageEventPageEventPage(BaseModel):
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -4189,6 +4204,7 @@ class GetWawCompetitionGetWawCompetitionPageEventPageContentModulesMinisitePage(
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -4859,6 +4875,7 @@ class GetWawCompetitionGetWawCompetitionPageContentModulesRelatedArticlesEventPa
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -5240,6 +5257,7 @@ class GetWawCompetitionGetWawCompetitionPageContentModulesRelatedArticlesRelated
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -5323,6 +5341,7 @@ class GetWawCompetitionGetWawCompetitionPageContentModulesRelatedArticlesRelated
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -5724,6 +5743,7 @@ class GetWawCompetitionGetWawCompetitionPageContentModulesRelatedArticlesRelated
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -5777,6 +5797,7 @@ class GetWawCompetitionGetWawCompetitionPageContentModulesRelatedArticlesRelated
         ]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional[
         "GetWawCompetitionGetWawCompetitionPageContentModulesRelatedArticlesRelatedMinisitePagesCampaign"
@@ -6104,6 +6125,7 @@ class GetWawCompetitionGetWawCompetitionPageContentModulesRelatedEventsPage(Base
         ]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional[
         "GetWawCompetitionGetWawCompetitionPageContentModulesRelatedEventsPageCampaign"
@@ -6412,6 +6434,7 @@ class GetWawCompetitionGetWawCompetitionPageContentModulesMinisitePage(BaseModel
         ]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional[
         "GetWawCompetitionGetWawCompetitionPageContentModulesMinisitePageCampaign"
@@ -6496,6 +6519,7 @@ class GetWawCompetitionGetWawCompetitionPageContentModulesMinisitePageEventPage(
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -6985,6 +7009,7 @@ class GetWawCompetitionGetWawCompetitionPageContentModulesMinisitePageContentMod
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -7426,6 +7451,7 @@ class GetWawCompetitionGetWawCompetitionPageContentModulesBannersPage(BaseModel)
         ]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional[
         "GetWawCompetitionGetWawCompetitionPageContentModulesBannersPageCampaign"
@@ -7628,6 +7654,7 @@ class GetWawCompetitionGetWawCompetitionPageContentModulesSectionsLinksPage(Base
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 

@@ -15,9 +15,9 @@ class GetAllCompetitions(BaseModel):
 
 
 class GetAllCompetitionsGetAllCompetitions(BaseModel):
-    page_next_event: Optional["GetAllCompetitionsGetAllCompetitionsPageNextEvent"] = (
-        Field(alias="pageNextEvent")
-    )
+    page_next_event: Optional[
+        "GetAllCompetitionsGetAllCompetitionsPageNextEvent"
+    ] = Field(alias="pageNextEvent")
     all_events: Optional[
         List[Optional["GetAllCompetitionsGetAllCompetitionsAllEvents"]]
     ] = Field(alias="allEvents")
@@ -136,6 +136,7 @@ class GetAllCompetitionsGetAllCompetitionsPageNextEventNextEventPage(BaseModel):
         ]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional[
         "GetAllCompetitionsGetAllCompetitionsPageNextEventNextEventPageCampaign"
@@ -220,6 +221,7 @@ class GetAllCompetitionsGetAllCompetitionsPageNextEventNextEventPageEventPage(
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -707,6 +709,7 @@ class GetAllCompetitionsGetAllCompetitionsPageNextEventNextEventPageContentModul
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -949,6 +952,7 @@ class GetAllCompetitionsGetAllCompetitionsPageNextEventLastEventPage(BaseModel):
         ]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional[
         "GetAllCompetitionsGetAllCompetitionsPageNextEventLastEventPageCampaign"
@@ -1033,6 +1037,7 @@ class GetAllCompetitionsGetAllCompetitionsPageNextEventLastEventPageEventPage(
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -1520,6 +1525,7 @@ class GetAllCompetitionsGetAllCompetitionsPageNextEventLastEventPageContentModul
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -1700,6 +1706,7 @@ class GetAllCompetitionsGetAllCompetitionsPageNextEventPage(BaseModel):
         ]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional["GetAllCompetitionsGetAllCompetitionsPageNextEventPageCampaign"]
 
@@ -1789,6 +1796,7 @@ class GetAllCompetitionsGetAllCompetitionsPageNextEventPageEventPage(BaseModel):
         ]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional[
         "GetAllCompetitionsGetAllCompetitionsPageNextEventPageEventPageCampaign"
@@ -2662,6 +2670,7 @@ class GetAllCompetitionsGetAllCompetitionsPageNextEventPageContentModulesRelated
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -2766,6 +2775,7 @@ class GetAllCompetitionsGetAllCompetitionsPageNextEventPageContentModulesRelated
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -2950,6 +2960,7 @@ class GetAllCompetitionsGetAllCompetitionsPageNextEventPageContentModulesMinisit
         ]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional[
         "GetAllCompetitionsGetAllCompetitionsPageNextEventPageContentModulesMinisitePageCampaign"
@@ -3286,6 +3297,7 @@ class GetAllCompetitionsGetAllCompetitionsPageNextEventPageContentModulesBanners
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -3423,12 +3435,12 @@ class GetAllCompetitionsGetAllCompetitionsAllEvents(BaseModel):
     logo_dark_id: Optional[str] = Field(alias="logoDarkId")
     style_overrides: Optional[str] = Field(alias="styleOverrides")
     related_info: Optional[List[Optional[str]]] = Field(alias="relatedInfo")
-    next_event: Optional["GetAllCompetitionsGetAllCompetitionsAllEventsNextEvent"] = (
-        Field(alias="nextEvent")
-    )
-    last_event: Optional["GetAllCompetitionsGetAllCompetitionsAllEventsLastEvent"] = (
-        Field(alias="lastEvent")
-    )
+    next_event: Optional[
+        "GetAllCompetitionsGetAllCompetitionsAllEventsNextEvent"
+    ] = Field(alias="nextEvent")
+    last_event: Optional[
+        "GetAllCompetitionsGetAllCompetitionsAllEventsLastEvent"
+    ] = Field(alias="lastEvent")
     next_event_start_date: Optional[Any] = Field(alias="nextEventStartDate")
     page_id: Optional[str] = Field(alias="pageId")
     page: Optional["GetAllCompetitionsGetAllCompetitionsAllEventsPage"]
@@ -3513,6 +3525,7 @@ class GetAllCompetitionsGetAllCompetitionsAllEventsNextEventPage(BaseModel):
         ]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional[
         "GetAllCompetitionsGetAllCompetitionsAllEventsNextEventPageCampaign"
@@ -3595,6 +3608,7 @@ class GetAllCompetitionsGetAllCompetitionsAllEventsNextEventPageEventPage(BaseMo
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -4080,6 +4094,7 @@ class GetAllCompetitionsGetAllCompetitionsAllEventsNextEventPageContentModulesMi
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -4316,6 +4331,7 @@ class GetAllCompetitionsGetAllCompetitionsAllEventsLastEventPage(BaseModel):
         ]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional[
         "GetAllCompetitionsGetAllCompetitionsAllEventsLastEventPageCampaign"
@@ -4398,6 +4414,7 @@ class GetAllCompetitionsGetAllCompetitionsAllEventsLastEventPageEventPage(BaseMo
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -4883,6 +4900,7 @@ class GetAllCompetitionsGetAllCompetitionsAllEventsLastEventPageContentModulesMi
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -5061,6 +5079,7 @@ class GetAllCompetitionsGetAllCompetitionsAllEventsPage(BaseModel):
         ]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional["GetAllCompetitionsGetAllCompetitionsAllEventsPageCampaign"]
 
@@ -5144,6 +5163,7 @@ class GetAllCompetitionsGetAllCompetitionsAllEventsPageEventPage(BaseModel):
         ]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional[
         "GetAllCompetitionsGetAllCompetitionsAllEventsPageEventPageCampaign"
@@ -6015,6 +6035,7 @@ class GetAllCompetitionsGetAllCompetitionsAllEventsPageContentModulesRelatedArti
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -6119,6 +6140,7 @@ class GetAllCompetitionsGetAllCompetitionsAllEventsPageContentModulesRelatedEven
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -6303,6 +6325,7 @@ class GetAllCompetitionsGetAllCompetitionsAllEventsPageContentModulesMinisitePag
         ]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional[
         "GetAllCompetitionsGetAllCompetitionsAllEventsPageContentModulesMinisitePageCampaign"
@@ -6635,6 +6658,7 @@ class GetAllCompetitionsGetAllCompetitionsAllEventsPageContentModulesBannersPage
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 

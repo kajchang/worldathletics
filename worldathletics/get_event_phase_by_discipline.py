@@ -245,6 +245,9 @@ class GetEventPhaseByDisciplineGetEventPhaseByDisciplineUnitsSeriesAttempts(Base
     competition_intermediate_name: Optional[str] = Field(
         alias="competitionIntermediateName"
     )
+    competition_intermediate_order: Optional[int] = Field(
+        alias="competitionIntermediateOrder"
+    )
     intermediate_gap: Optional[str] = Field(alias="intermediateGap")
 
 

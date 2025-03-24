@@ -28,11 +28,28 @@ class ResultsByAthleteResultsByAthleteResults(BaseModel):
     match_type: Optional[str] = Field(alias="matchType")
     place: Optional[str]
     race: Optional[str]
-    team: Optional[str]
+    team: Optional["ResultsByAthleteResultsByAthleteResultsTeam"]
     venue: Optional[str]
 
 
 class ResultsByAthleteResultsByAthleteResultsAthlete(BaseModel):
+    birth_date: Optional[str] = Field(alias="birthDate")
+    country: Optional[str]
+    iaaf_id: Optional[int] = Field(alias="iaafId")
+    id: Optional[int]
+    name: Optional[str]
+    url_slug: Optional[str] = Field(alias="urlSlug")
+
+
+class ResultsByAthleteResultsByAthleteResultsTeam(BaseModel):
+    name: Optional[str]
+    country: Optional[str]
+    team_members: Optional[
+        List[Optional["ResultsByAthleteResultsByAthleteResultsTeamTeamMembers"]]
+    ] = Field(alias="teamMembers")
+
+
+class ResultsByAthleteResultsByAthleteResultsTeamTeamMembers(BaseModel):
     birth_date: Optional[str] = Field(alias="birthDate")
     country: Optional[str]
     iaaf_id: Optional[int] = Field(alias="iaafId")
@@ -51,3 +68,4 @@ class ResultsByAthleteResultsByAthleteParameters(BaseModel):
 ResultsByAthlete.model_rebuild()
 ResultsByAthleteResultsByAthlete.model_rebuild()
 ResultsByAthleteResultsByAthleteResults.model_rebuild()
+ResultsByAthleteResultsByAthleteResultsTeam.model_rebuild()

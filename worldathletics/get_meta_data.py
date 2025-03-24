@@ -13,9 +13,9 @@ class GetMetaData(BaseModel):
 
 
 class GetMetaDataGetMetaData(BaseModel):
-    country_codes: Optional[List[Optional["GetMetaDataGetMetaDataCountryCodes"]]] = (
-        Field(alias="countryCodes")
-    )
+    country_codes: Optional[
+        List[Optional["GetMetaDataGetMetaDataCountryCodes"]]
+    ] = Field(alias="countryCodes")
     discipline_codes: Optional[
         List[Optional["GetMetaDataGetMetaDataDisciplineCodes"]]
     ] = Field(alias="disciplineCodes")

@@ -9,9 +9,9 @@ from .base_model import BaseModel
 
 
 class GetRankingGroups(BaseModel):
-    get_ranking_groups: Optional[List[Optional["GetRankingGroupsGetRankingGroups"]]] = (
-        Field(alias="getRankingGroups")
-    )
+    get_ranking_groups: Optional[
+        List[Optional["GetRankingGroupsGetRankingGroups"]]
+    ] = Field(alias="getRankingGroups")
 
 
 class GetRankingGroupsGetRankingGroups(BaseModel):

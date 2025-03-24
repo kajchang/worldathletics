@@ -93,6 +93,7 @@ class GetWawMenuGetWawMenuEventPage(BaseModel):
         List[Optional["GetWawMenuGetWawMenuEventPageContentModules"]]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional["GetWawMenuGetWawMenuEventPageCampaign"]
 
@@ -168,6 +169,7 @@ class GetWawMenuGetWawMenuEventPageEventPage(BaseModel):
         List[Optional["GetWawMenuGetWawMenuEventPageEventPageContentModules"]]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional["GetWawMenuGetWawMenuEventPageEventPageCampaign"]
 
@@ -304,9 +306,9 @@ class GetWawMenuGetWawMenuEventPageMinisite(BaseModel):
     logo: Optional["GetWawMenuGetWawMenuEventPageMinisiteLogo"]
     logo_edited: Optional[str] = Field(alias="logoEdited")
     feature_image_id: Optional[str] = Field(alias="featureImageId")
-    feature_image: Optional["GetWawMenuGetWawMenuEventPageMinisiteFeatureImage"] = (
-        Field(alias="featureImage")
-    )
+    feature_image: Optional[
+        "GetWawMenuGetWawMenuEventPageMinisiteFeatureImage"
+    ] = Field(alias="featureImage")
     feature_image_edited: Optional[str] = Field(alias="featureImageEdited")
     theme: Optional[str]
     default_sponsor_ids: Optional[List[Optional[str]]] = Field(
@@ -953,6 +955,7 @@ class GetWawMenuGetWawMenuEventPageContentModulesRelatedArticlesRelatedMinisiteP
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -1045,6 +1048,7 @@ class GetWawMenuGetWawMenuEventPageContentModulesRelatedEventsPage(BaseModel):
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -1215,6 +1219,7 @@ class GetWawMenuGetWawMenuEventPageContentModulesMinisitePage(BaseModel):
         ]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional[
         "GetWawMenuGetWawMenuEventPageContentModulesMinisitePageCampaign"
@@ -1511,6 +1516,7 @@ class GetWawMenuGetWawMenuEventPageContentModulesBannersPage(BaseModel):
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -1644,6 +1650,7 @@ class GetWawMenuGetWawMenuItemsPage(BaseModel):
         List[Optional["GetWawMenuGetWawMenuItemsPageContentModules"]]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional["GetWawMenuGetWawMenuItemsPageCampaign"]
 
@@ -1719,6 +1726,7 @@ class GetWawMenuGetWawMenuItemsPageEventPage(BaseModel):
         List[Optional["GetWawMenuGetWawMenuItemsPageEventPageContentModules"]]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional["GetWawMenuGetWawMenuItemsPageEventPageCampaign"]
 
@@ -1855,9 +1863,9 @@ class GetWawMenuGetWawMenuItemsPageMinisite(BaseModel):
     logo: Optional["GetWawMenuGetWawMenuItemsPageMinisiteLogo"]
     logo_edited: Optional[str] = Field(alias="logoEdited")
     feature_image_id: Optional[str] = Field(alias="featureImageId")
-    feature_image: Optional["GetWawMenuGetWawMenuItemsPageMinisiteFeatureImage"] = (
-        Field(alias="featureImage")
-    )
+    feature_image: Optional[
+        "GetWawMenuGetWawMenuItemsPageMinisiteFeatureImage"
+    ] = Field(alias="featureImage")
     feature_image_edited: Optional[str] = Field(alias="featureImageEdited")
     theme: Optional[str]
     default_sponsor_ids: Optional[List[Optional[str]]] = Field(
@@ -2504,6 +2512,7 @@ class GetWawMenuGetWawMenuItemsPageContentModulesRelatedArticlesRelatedMinisiteP
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -2596,6 +2605,7 @@ class GetWawMenuGetWawMenuItemsPageContentModulesRelatedEventsPage(BaseModel):
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -2766,6 +2776,7 @@ class GetWawMenuGetWawMenuItemsPageContentModulesMinisitePage(BaseModel):
         ]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional[
         "GetWawMenuGetWawMenuItemsPageContentModulesMinisitePageCampaign"
@@ -3062,6 +3073,7 @@ class GetWawMenuGetWawMenuItemsPageContentModulesBannersPage(BaseModel):
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -3195,6 +3207,7 @@ class GetWawMenuGetWawMenuItemsItemsPage(BaseModel):
         List[Optional["GetWawMenuGetWawMenuItemsItemsPageContentModules"]]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional["GetWawMenuGetWawMenuItemsItemsPageCampaign"]
 
@@ -3267,6 +3280,7 @@ class GetWawMenuGetWawMenuItemsItemsPageEventPage(BaseModel):
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -3674,6 +3688,7 @@ class GetWawMenuGetWawMenuItemsItemsPageContentModulesMinisitePage(BaseModel):
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -3842,6 +3857,7 @@ class GetWawMenuGetWawMenuItemsItemsItemsPage(BaseModel):
         List[Optional["GetWawMenuGetWawMenuItemsItemsItemsPageContentModules"]]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional["GetWawMenuGetWawMenuItemsItemsItemsPageCampaign"]
 
@@ -3993,6 +4009,7 @@ class GetWawMenuGetWawMenuItemsItemsItemsItemsPage(BaseModel):
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 

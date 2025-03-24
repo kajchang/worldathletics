@@ -15,9 +15,9 @@ class GetCarousel(BaseModel):
 class GetCarouselGetCarousel(BaseModel):
     id: Optional[str]
     title: Optional[str]
-    carousel_items: Optional[List[Optional["GetCarouselGetCarouselCarouselItems"]]] = (
-        Field(alias="carouselItems")
-    )
+    carousel_items: Optional[
+        List[Optional["GetCarouselGetCarouselCarouselItems"]]
+    ] = Field(alias="carouselItems")
     media: Optional[List[Optional["GetCarouselGetCarouselMedia"]]]
     primary_media_ids: Optional[List[Optional[str]]] = Field(alias="primaryMediaIds")
 

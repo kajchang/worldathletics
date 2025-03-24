@@ -22,9 +22,9 @@ class GetAssetsGetAssets(BaseModel):
     thumbnail_feature_image_edited: Optional[str] = Field(
         alias="thumbnailFeatureImageEdited"
     )
-    thumbnail_feature_image: Optional["GetAssetsGetAssetsThumbnailFeatureImage"] = (
-        Field(alias="thumbnailFeatureImage")
-    )
+    thumbnail_feature_image: Optional[
+        "GetAssetsGetAssetsThumbnailFeatureImage"
+    ] = Field(alias="thumbnailFeatureImage")
     gated_content: Optional[bool] = Field(alias="gatedContent")
     download_only: Optional[bool] = Field(alias="downloadOnly")
     tags: Optional[List[Optional[str]]]

@@ -9,9 +9,9 @@ from .base_model import BaseModel
 
 
 class GetVideosTotalNumber(BaseModel):
-    get_videos_total_number: Optional["GetVideosTotalNumberGetVideosTotalNumber"] = (
-        Field(alias="getVideosTotalNumber")
-    )
+    get_videos_total_number: Optional[
+        "GetVideosTotalNumberGetVideosTotalNumber"
+    ] = Field(alias="getVideosTotalNumber")
 
 
 class GetVideosTotalNumberGetVideosTotalNumber(BaseModel):

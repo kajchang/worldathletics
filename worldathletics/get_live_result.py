@@ -59,9 +59,9 @@ class GetLiveResultGetLiveResult(BaseModel):
     updated_on: Optional[str] = Field(alias="updatedOn")
     wind: Optional[str]
     team_name: Optional[str] = Field(alias="teamName")
-    team_members: Optional[List[Optional["GetLiveResultGetLiveResultTeamMembers"]]] = (
-        Field(alias="teamMembers")
-    )
+    team_members: Optional[
+        List[Optional["GetLiveResultGetLiveResultTeamMembers"]]
+    ] = Field(alias="teamMembers")
     event_store_id: Optional[str] = Field(alias="eventStoreId")
     competition_id: Optional[int] = Field(alias="competitionId")
     result_milliseconds: Optional[str] = Field(alias="resultMilliseconds")

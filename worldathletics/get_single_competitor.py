@@ -19,27 +19,27 @@ class GetSingleCompetitorGetSingleCompetitor(BaseModel):
     basic_data: Optional["GetSingleCompetitorGetSingleCompetitorBasicData"] = Field(
         alias="basicData"
     )
-    personal_bests: Optional["GetSingleCompetitorGetSingleCompetitorPersonalBests"] = (
-        Field(alias="personalBests")
-    )
-    seasons_bests: Optional["GetSingleCompetitorGetSingleCompetitorSeasonsBests"] = (
-        Field(alias="seasonsBests")
-    )
+    personal_bests: Optional[
+        "GetSingleCompetitorGetSingleCompetitorPersonalBests"
+    ] = Field(alias="personalBests")
+    seasons_bests: Optional[
+        "GetSingleCompetitorGetSingleCompetitorSeasonsBests"
+    ] = Field(alias="seasonsBests")
     progression_of_seasons_bests: Optional[
         List[
             Optional["GetSingleCompetitorGetSingleCompetitorProgressionOfSeasonsBests"]
         ]
     ] = Field(alias="progressionOfSeasonsBests")
-    world_rankings: Optional["GetSingleCompetitorGetSingleCompetitorWorldRankings"] = (
-        Field(alias="worldRankings")
-    )
+    world_rankings: Optional[
+        "GetSingleCompetitorGetSingleCompetitorWorldRankings"
+    ] = Field(alias="worldRankings")
     honours: Optional[List[Optional["GetSingleCompetitorGetSingleCompetitorHonours"]]]
-    results_by_year: Optional["GetSingleCompetitorGetSingleCompetitorResultsByYear"] = (
-        Field(alias="resultsByYear")
-    )
-    results_by_date: Optional["GetSingleCompetitorGetSingleCompetitorResultsByDate"] = (
-        Field(alias="resultsByDate")
-    )
+    results_by_year: Optional[
+        "GetSingleCompetitorGetSingleCompetitorResultsByYear"
+    ] = Field(alias="resultsByYear")
+    results_by_date: Optional[
+        "GetSingleCompetitorGetSingleCompetitorResultsByDate"
+    ] = Field(alias="resultsByDate")
     primary_media_id: Optional[List[Optional[str]]] = Field(alias="primaryMediaId")
     primary_media_id_2: Optional[bool] = Field(alias="primaryMediaId2")
     primary_media: Optional[

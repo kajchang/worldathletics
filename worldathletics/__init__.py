@@ -975,6 +975,11 @@ from .get_competitors_legacy_primary_media import (
     GetCompetitorsLegacyPrimaryMedia,
     GetCompetitorsLegacyPrimaryMediaGetCompetitorsLegacyPrimaryMedia,
 )
+from .get_contact_preferences import (
+    GetContactPreferences,
+    GetContactPreferencesGetContactPreferences,
+    GetContactPreferencesGetContactPreferencesData,
+)
 from .get_countries import GetCountries, GetCountriesGetCountries
 from .get_discipline import GetDiscipline, GetDisciplineGetDiscipline
 from .get_drafted_article import (
@@ -4821,6 +4826,8 @@ from .results_by_athlete import (
     ResultsByAthleteResultsByAthleteParameters,
     ResultsByAthleteResultsByAthleteResults,
     ResultsByAthleteResultsByAthleteResultsAthlete,
+    ResultsByAthleteResultsByAthleteResultsTeam,
+    ResultsByAthleteResultsByAthleteResultsTeamTeamMembers,
 )
 from .search_athletes import (
     SearchAthletes,
@@ -4831,6 +4838,7 @@ from .search_athletes import (
     SearchAthletesSearchAthletesPrimaryMedia,
 )
 from .search_competitors import SearchCompetitors, SearchCompetitorsSearchCompetitors
+from .sign_cookies import SignCookies, SignCookiesSignCookies
 from .team_profile import (
     TeamProfile,
     TeamProfileTeamProfile,
@@ -5755,6 +5763,9 @@ __all__ = [
     "GetCompetitorGetCompetitor",
     "GetCompetitorsLegacyPrimaryMedia",
     "GetCompetitorsLegacyPrimaryMediaGetCompetitorsLegacyPrimaryMedia",
+    "GetContactPreferences",
+    "GetContactPreferencesGetContactPreferences",
+    "GetContactPreferencesGetContactPreferencesData",
     "GetCountries",
     "GetCountriesGetCountries",
     "GetDiscipline",
@@ -9460,6 +9471,8 @@ __all__ = [
     "ResultsByAthleteResultsByAthleteParameters",
     "ResultsByAthleteResultsByAthleteResults",
     "ResultsByAthleteResultsByAthleteResultsAthlete",
+    "ResultsByAthleteResultsByAthleteResultsTeam",
+    "ResultsByAthleteResultsByAthleteResultsTeamTeamMembers",
     "SearchAthletes",
     "SearchAthletesSearchAthletes",
     "SearchAthletesSearchAthletesCompetitionEntries",
@@ -9468,6 +9481,8 @@ __all__ = [
     "SearchAthletesSearchAthletesPrimaryMedia",
     "SearchCompetitors",
     "SearchCompetitorsSearchCompetitors",
+    "SignCookies",
+    "SignCookiesSignCookies",
     "TeamProfile",
     "TeamProfileTeamProfile",
     "TeamProfileTeamProfilePersonalBestInfo",

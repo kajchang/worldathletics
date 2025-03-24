@@ -9,9 +9,9 @@ from .base_model import BaseModel
 
 
 class GetPlacingTable(BaseModel):
-    get_placing_table: Optional[List[Optional["GetPlacingTableGetPlacingTable"]]] = (
-        Field(alias="getPlacingTable")
-    )
+    get_placing_table: Optional[
+        List[Optional["GetPlacingTableGetPlacingTable"]]
+    ] = Field(alias="getPlacingTable")
 
 
 class GetPlacingTableGetPlacingTable(BaseModel):

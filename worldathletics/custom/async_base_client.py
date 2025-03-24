@@ -60,7 +60,7 @@ class GraphQLTransportWSMessageType(str, enum.Enum):
 class AsyncBaseClient:
     def __init__(
         self,
-        url: str = "https://graphql-prod-4625.prod.aws.worldathletics.org/graphql",
+        url: str = "https://graphql-prod-4746.prod.aws.worldathletics.org/graphql",
         headers: Optional[Dict[str, str]] = { "x-api-key": "da2-fcprvsdozzce5dx2baifenjwpu", "x-amz-user-agent": "aws-amplify/3.0.2" },
         http_client: Optional[httpx.AsyncClient] = None,
         ws_url: str = "",

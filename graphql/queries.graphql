@@ -1422,6 +1422,17 @@ query TeamStandings($unitId: Int!, $type: String!, $teamCountryCode: String, $co
   }
 }
 
+query GetContactPreferences($email_id: String!) {
+  getContactPreferences(email_id: $email_id) {
+    success
+    data {
+      contactPreferences
+      consents
+    }
+    error
+  }
+}
+
 query GetCampaigns {
   getCampaigns {
     id
@@ -1499,6 +1510,10 @@ query GetUser {
       disciplineCategories
       interests
       contactPreferences
+      consents
+      eventsContactPreferences
+      insideTrackContactPreferences
+      worldAhleticsFamilyContactPreferences
       source
       tags
       followedCompetitors
@@ -2267,6 +2282,7 @@ query GetArticles($ids: [String], $RelatedEventIds: [Int], $RelatedArticleIds: [
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -2416,6 +2432,7 @@ query GetArticles($ids: [String], $RelatedEventIds: [Int], $RelatedArticleIds: [
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -2480,6 +2497,7 @@ query GetArticles($ids: [String], $RelatedEventIds: [Int], $RelatedArticleIds: [
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -2601,6 +2619,7 @@ query GetArticles($ids: [String], $RelatedEventIds: [Int], $RelatedArticleIds: [
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -2865,6 +2884,7 @@ query GetArticles($ids: [String], $RelatedEventIds: [Int], $RelatedArticleIds: [
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -3044,6 +3064,7 @@ query GetArticles($ids: [String], $RelatedEventIds: [Int], $RelatedArticleIds: [
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -3134,6 +3155,7 @@ query GetArticles($ids: [String], $RelatedEventIds: [Int], $RelatedArticleIds: [
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -3406,6 +3428,7 @@ query GetArticles($ids: [String], $RelatedEventIds: [Int], $RelatedArticleIds: [
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -3549,6 +3572,7 @@ query GetArticles($ids: [String], $RelatedEventIds: [Int], $RelatedArticleIds: [
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -3765,6 +3789,7 @@ query GetArticles($ids: [String], $RelatedEventIds: [Int], $RelatedArticleIds: [
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -4037,6 +4062,7 @@ query GetArticles($ids: [String], $RelatedEventIds: [Int], $RelatedArticleIds: [
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -4180,6 +4206,7 @@ query GetArticles($ids: [String], $RelatedEventIds: [Int], $RelatedArticleIds: [
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -4311,6 +4338,7 @@ query GetArticles($ids: [String], $RelatedEventIds: [Int], $RelatedArticleIds: [
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -4583,6 +4611,7 @@ query GetArticles($ids: [String], $RelatedEventIds: [Int], $RelatedArticleIds: [
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -4726,6 +4755,7 @@ query GetArticles($ids: [String], $RelatedEventIds: [Int], $RelatedArticleIds: [
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -4914,6 +4944,7 @@ query GetArticles($ids: [String], $RelatedEventIds: [Int], $RelatedArticleIds: [
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -5329,6 +5360,7 @@ query GetArticles($ids: [String], $RelatedEventIds: [Int], $RelatedArticleIds: [
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -5414,6 +5446,7 @@ query GetArticles($ids: [String], $RelatedEventIds: [Int], $RelatedArticleIds: [
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -5654,6 +5687,7 @@ query GetArticles($ids: [String], $RelatedEventIds: [Int], $RelatedArticleIds: [
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -5797,6 +5831,7 @@ query GetArticles($ids: [String], $RelatedEventIds: [Int], $RelatedArticleIds: [
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -5905,6 +5940,7 @@ query GetArticles($ids: [String], $RelatedEventIds: [Int], $RelatedArticleIds: [
           }
         }
         gatedContent
+        noIndex
         campaignId
         campaign {
           id
@@ -6493,6 +6529,7 @@ query GetArticle($urlSlug: String!) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -6642,6 +6679,7 @@ query GetArticle($urlSlug: String!) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -6706,6 +6744,7 @@ query GetArticle($urlSlug: String!) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -6827,6 +6866,7 @@ query GetArticle($urlSlug: String!) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -7091,6 +7131,7 @@ query GetArticle($urlSlug: String!) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -7270,6 +7311,7 @@ query GetArticle($urlSlug: String!) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -7360,6 +7402,7 @@ query GetArticle($urlSlug: String!) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -7632,6 +7675,7 @@ query GetArticle($urlSlug: String!) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -7775,6 +7819,7 @@ query GetArticle($urlSlug: String!) {
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -7991,6 +8036,7 @@ query GetArticle($urlSlug: String!) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -8263,6 +8309,7 @@ query GetArticle($urlSlug: String!) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -8406,6 +8453,7 @@ query GetArticle($urlSlug: String!) {
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -8537,6 +8585,7 @@ query GetArticle($urlSlug: String!) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -8809,6 +8858,7 @@ query GetArticle($urlSlug: String!) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -8952,6 +9002,7 @@ query GetArticle($urlSlug: String!) {
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -9140,6 +9191,7 @@ query GetArticle($urlSlug: String!) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -9555,6 +9607,7 @@ query GetArticle($urlSlug: String!) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -9640,6 +9693,7 @@ query GetArticle($urlSlug: String!) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -9880,6 +9934,7 @@ query GetArticle($urlSlug: String!) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -10023,6 +10078,7 @@ query GetArticle($urlSlug: String!) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -10131,6 +10187,7 @@ query GetArticle($urlSlug: String!) {
           }
         }
         gatedContent
+        noIndex
         campaignId
         campaign {
           id
@@ -10428,6 +10485,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -10843,6 +10901,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -10928,6 +10987,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -11168,6 +11228,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -11311,6 +11372,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -11419,6 +11481,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
           }
         }
         gatedContent
+        noIndex
         campaignId
         campaign {
           id
@@ -11813,6 +11876,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -12085,6 +12149,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -12228,6 +12293,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -12359,6 +12425,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -12631,6 +12698,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -12774,6 +12842,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -12962,6 +13031,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -13377,6 +13447,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -13462,6 +13533,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -13702,6 +13774,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -13845,6 +13918,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -13953,6 +14027,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
           }
         }
         gatedContent
+        noIndex
         campaignId
         campaign {
           id
@@ -14179,6 +14254,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -14594,6 +14670,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -14679,6 +14756,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -14919,6 +14997,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -15062,6 +15141,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -15170,6 +15250,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
           }
         }
         gatedContent
+        noIndex
         campaignId
         campaign {
           id
@@ -15338,6 +15419,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -15610,6 +15692,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -15753,6 +15836,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -16189,6 +16273,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -16368,6 +16453,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -16458,6 +16544,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -16730,6 +16817,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -16873,6 +16961,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -17001,6 +17090,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -17273,6 +17363,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -17416,6 +17507,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -17632,6 +17724,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -17942,6 +18035,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -18006,6 +18100,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -18127,6 +18222,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -18303,6 +18399,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -18421,6 +18518,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -18709,6 +18807,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -18770,6 +18869,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -19040,6 +19140,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -19180,6 +19281,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -19341,6 +19443,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -19613,6 +19716,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -19756,6 +19860,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -20021,6 +20126,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -20436,6 +20542,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -20521,6 +20628,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -20761,6 +20869,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -20904,6 +21013,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -21012,6 +21122,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
           }
         }
         gatedContent
+        noIndex
         campaignId
         campaign {
           id
@@ -21229,6 +21340,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -21501,6 +21613,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -21644,6 +21757,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -21890,6 +22004,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -22178,6 +22293,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -22239,6 +22355,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -22509,6 +22626,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -22649,6 +22767,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -22901,6 +23020,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -23110,6 +23230,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -23382,6 +23503,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -23525,6 +23647,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -23818,6 +23941,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -23880,6 +24004,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             fileId
@@ -23972,6 +24097,7 @@ query GetNewArticles($language: String, $orderBy: OrderByNewArticleEnum, $orderD
         }
       }
       gatedContent
+      noIndex
       campaignId
       campaign {
         id
@@ -24318,6 +24444,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -24733,6 +24860,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -24818,6 +24946,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -25058,6 +25187,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -25201,6 +25331,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -25309,6 +25440,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
           }
         }
         gatedContent
+        noIndex
         campaignId
         campaign {
           id
@@ -25703,6 +25835,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -25975,6 +26108,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -26118,6 +26252,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -26249,6 +26384,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -26521,6 +26657,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -26664,6 +26801,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -26852,6 +26990,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -27267,6 +27406,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -27352,6 +27492,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -27592,6 +27733,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -27735,6 +27877,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -27843,6 +27986,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
           }
         }
         gatedContent
+        noIndex
         campaignId
         campaign {
           id
@@ -28069,6 +28213,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -28484,6 +28629,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -28569,6 +28715,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -28809,6 +28956,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -28952,6 +29100,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -29060,6 +29209,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
           }
         }
         gatedContent
+        noIndex
         campaignId
         campaign {
           id
@@ -29228,6 +29378,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -29500,6 +29651,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -29643,6 +29795,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -30079,6 +30232,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -30258,6 +30412,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -30348,6 +30503,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -30620,6 +30776,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -30763,6 +30920,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -30891,6 +31049,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -31163,6 +31322,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -31306,6 +31466,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -31522,6 +31683,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -31832,6 +31994,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -31896,6 +32059,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -32017,6 +32181,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -32193,6 +32358,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -32311,6 +32477,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -32599,6 +32766,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -32660,6 +32828,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -32930,6 +33099,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -33070,6 +33240,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -33231,6 +33402,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -33503,6 +33675,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -33646,6 +33819,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -33911,6 +34085,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -34326,6 +34501,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -34411,6 +34587,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -34651,6 +34828,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -34794,6 +34972,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -34902,6 +35081,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
           }
         }
         gatedContent
+        noIndex
         campaignId
         campaign {
           id
@@ -35119,6 +35299,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -35391,6 +35572,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -35534,6 +35716,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -35780,6 +35963,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -36068,6 +36252,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -36129,6 +36314,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -36399,6 +36585,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -36539,6 +36726,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -36791,6 +36979,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -37000,6 +37189,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -37272,6 +37462,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -37415,6 +37606,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -37708,6 +37900,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -37770,6 +37963,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             fileId
@@ -37862,6 +38056,7 @@ query GetNewArticle($urlSlug: String!, $language: String) {
         }
       }
       gatedContent
+      noIndex
       campaignId
       campaign {
         id
@@ -38208,6 +38403,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -38623,6 +38819,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -38708,6 +38905,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -38948,6 +39146,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -39091,6 +39290,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -39199,6 +39399,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
           }
         }
         gatedContent
+        noIndex
         campaignId
         campaign {
           id
@@ -39593,6 +39794,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -39865,6 +40067,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -40008,6 +40211,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -40139,6 +40343,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -40411,6 +40616,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -40554,6 +40760,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -40742,6 +40949,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -41157,6 +41365,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -41242,6 +41451,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -41482,6 +41692,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -41625,6 +41836,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -41733,6 +41945,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
           }
         }
         gatedContent
+        noIndex
         campaignId
         campaign {
           id
@@ -41959,6 +42172,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -42374,6 +42588,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -42459,6 +42674,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -42699,6 +42915,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -42842,6 +43059,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -42950,6 +43168,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
           }
         }
         gatedContent
+        noIndex
         campaignId
         campaign {
           id
@@ -43118,6 +43337,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -43390,6 +43610,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -43533,6 +43754,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -43969,6 +44191,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -44148,6 +44371,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -44238,6 +44462,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -44510,6 +44735,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -44653,6 +44879,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -44781,6 +45008,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -45053,6 +45281,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -45196,6 +45425,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -45412,6 +45642,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -45722,6 +45953,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -45786,6 +46018,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -45907,6 +46140,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -46083,6 +46317,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -46201,6 +46436,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -46489,6 +46725,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -46550,6 +46787,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -46820,6 +47058,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -46960,6 +47199,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -47121,6 +47361,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -47393,6 +47634,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -47536,6 +47778,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -47801,6 +48044,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -48216,6 +48460,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -48301,6 +48546,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -48541,6 +48787,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -48684,6 +48931,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -48792,6 +49040,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
           }
         }
         gatedContent
+        noIndex
         campaignId
         campaign {
           id
@@ -49009,6 +49258,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -49281,6 +49531,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -49424,6 +49675,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -49670,6 +49922,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -49958,6 +50211,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -50019,6 +50273,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -50289,6 +50544,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -50429,6 +50685,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -50681,6 +50938,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -50890,6 +51148,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -51162,6 +51421,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -51305,6 +51565,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -51598,6 +51859,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -51660,6 +51922,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             fileId
@@ -51752,6 +52015,7 @@ query GetDraftedArticle($urlSlug: String!, $language: String) {
         }
       }
       gatedContent
+      noIndex
       campaignId
       campaign {
         id
@@ -53127,6 +53391,7 @@ query GetAllCompetitions {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -53399,6 +53664,7 @@ query GetAllCompetitions {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -53542,6 +53808,7 @@ query GetAllCompetitions {
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -53673,6 +53940,7 @@ query GetAllCompetitions {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -53945,6 +54213,7 @@ query GetAllCompetitions {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -54088,6 +54357,7 @@ query GetAllCompetitions {
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -54276,6 +54546,7 @@ query GetAllCompetitions {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -54691,6 +54962,7 @@ query GetAllCompetitions {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -54776,6 +55048,7 @@ query GetAllCompetitions {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -55016,6 +55289,7 @@ query GetAllCompetitions {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -55159,6 +55433,7 @@ query GetAllCompetitions {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -55267,6 +55542,7 @@ query GetAllCompetitions {
           }
         }
         gatedContent
+        noIndex
         campaignId
         campaign {
           id
@@ -55411,6 +55687,7 @@ query GetAllCompetitions {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -55683,6 +55960,7 @@ query GetAllCompetitions {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -55826,6 +56104,7 @@ query GetAllCompetitions {
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -55957,6 +56236,7 @@ query GetAllCompetitions {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -56229,6 +56509,7 @@ query GetAllCompetitions {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -56372,6 +56653,7 @@ query GetAllCompetitions {
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -56560,6 +56842,7 @@ query GetAllCompetitions {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -56975,6 +57258,7 @@ query GetAllCompetitions {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -57060,6 +57344,7 @@ query GetAllCompetitions {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -57300,6 +57585,7 @@ query GetAllCompetitions {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -57443,6 +57729,7 @@ query GetAllCompetitions {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -57551,6 +57838,7 @@ query GetAllCompetitions {
           }
         }
         gatedContent
+        noIndex
         campaignId
         campaign {
           id
@@ -57820,6 +58108,7 @@ query GetWawCompetition($urlSlug: String!) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -58235,6 +58524,7 @@ query GetWawCompetition($urlSlug: String!) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -58320,6 +58610,7 @@ query GetWawCompetition($urlSlug: String!) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -58560,6 +58851,7 @@ query GetWawCompetition($urlSlug: String!) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -58703,6 +58995,7 @@ query GetWawCompetition($urlSlug: String!) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -58811,6 +59104,7 @@ query GetWawCompetition($urlSlug: String!) {
           }
         }
         gatedContent
+        noIndex
         campaignId
         campaign {
           id
@@ -59040,6 +59334,7 @@ query GetWawCompetition($urlSlug: String!) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -59455,6 +59750,7 @@ query GetWawCompetition($urlSlug: String!) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -59540,6 +59836,7 @@ query GetWawCompetition($urlSlug: String!) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -59780,6 +60077,7 @@ query GetWawCompetition($urlSlug: String!) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -59923,6 +60221,7 @@ query GetWawCompetition($urlSlug: String!) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -60031,6 +60330,7 @@ query GetWawCompetition($urlSlug: String!) {
           }
         }
         gatedContent
+        noIndex
         campaignId
         campaign {
           id
@@ -60171,6 +60471,7 @@ query GetWawCompetition($urlSlug: String!) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -60443,6 +60744,7 @@ query GetWawCompetition($urlSlug: String!) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -60586,6 +60888,7 @@ query GetWawCompetition($urlSlug: String!) {
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -60832,6 +61135,7 @@ query GetWawCompetition($urlSlug: String!) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -61120,6 +61424,7 @@ query GetWawCompetition($urlSlug: String!) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -61181,6 +61486,7 @@ query GetWawCompetition($urlSlug: String!) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -61451,6 +61757,7 @@ query GetWawCompetition($urlSlug: String!) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -61591,6 +61898,7 @@ query GetWawCompetition($urlSlug: String!) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -61843,6 +62151,7 @@ query GetWawCompetition($urlSlug: String!) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -62052,6 +62361,7 @@ query GetWawCompetition($urlSlug: String!) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -62324,6 +62634,7 @@ query GetWawCompetition($urlSlug: String!) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -62467,6 +62778,7 @@ query GetWawCompetition($urlSlug: String!) {
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -62760,6 +63072,7 @@ query GetWawCompetition($urlSlug: String!) {
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -62822,6 +63135,7 @@ query GetWawCompetition($urlSlug: String!) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             fileId
@@ -62914,6 +63228,7 @@ query GetWawCompetition($urlSlug: String!) {
         }
       }
       gatedContent
+      noIndex
       campaignId
       campaign {
         id
@@ -64251,6 +64566,7 @@ query GetEventPhaseByDiscipline($eventId: Int, $disciplineCode: String, $sexCode
           intermediateMark
           intermediateWind
           competitionIntermediateName
+          competitionIntermediateOrder
           intermediateGap
         }
       }
@@ -64979,6 +65295,7 @@ query GetEventTimetableWithContent($eventId: Int, $disciplineCode: String, $orde
           intermediateMark
           intermediateWind
           competitionIntermediateName
+          competitionIntermediateOrder
           intermediateGap
         }
       }
@@ -65243,6 +65560,7 @@ query GetEvents($subCategoryNameUrlSlug: String, $circuitTypeCode: String, $orde
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -65515,6 +65833,7 @@ query GetEvents($subCategoryNameUrlSlug: String, $circuitTypeCode: String, $orde
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -65658,6 +65977,7 @@ query GetEvents($subCategoryNameUrlSlug: String, $circuitTypeCode: String, $orde
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -65904,6 +66224,7 @@ query GetEvents($subCategoryNameUrlSlug: String, $circuitTypeCode: String, $orde
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -66192,6 +66513,7 @@ query GetEvents($subCategoryNameUrlSlug: String, $circuitTypeCode: String, $orde
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -66253,6 +66575,7 @@ query GetEvents($subCategoryNameUrlSlug: String, $circuitTypeCode: String, $orde
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -66523,6 +66846,7 @@ query GetEvents($subCategoryNameUrlSlug: String, $circuitTypeCode: String, $orde
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -66663,6 +66987,7 @@ query GetEvents($subCategoryNameUrlSlug: String, $circuitTypeCode: String, $orde
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -66915,6 +67240,7 @@ query GetEvents($subCategoryNameUrlSlug: String, $circuitTypeCode: String, $orde
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -67124,6 +67450,7 @@ query GetEvents($subCategoryNameUrlSlug: String, $circuitTypeCode: String, $orde
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -67396,6 +67723,7 @@ query GetEvents($subCategoryNameUrlSlug: String, $circuitTypeCode: String, $orde
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -67539,6 +67867,7 @@ query GetEvents($subCategoryNameUrlSlug: String, $circuitTypeCode: String, $orde
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -67832,6 +68161,7 @@ query GetEvents($subCategoryNameUrlSlug: String, $circuitTypeCode: String, $orde
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -67894,6 +68224,7 @@ query GetEvents($subCategoryNameUrlSlug: String, $circuitTypeCode: String, $orde
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             fileId
@@ -67986,6 +68317,7 @@ query GetEvents($subCategoryNameUrlSlug: String, $circuitTypeCode: String, $orde
         }
       }
       gatedContent
+      noIndex
       campaignId
       campaign {
         id
@@ -68176,6 +68508,7 @@ query GetWawEvent($nameUrlSlug: String, $id: Int, $circuitTypeCode: String, $sub
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -68448,6 +68781,7 @@ query GetWawEvent($nameUrlSlug: String, $id: Int, $circuitTypeCode: String, $sub
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -68591,6 +68925,7 @@ query GetWawEvent($nameUrlSlug: String, $id: Int, $circuitTypeCode: String, $sub
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -68837,6 +69172,7 @@ query GetWawEvent($nameUrlSlug: String, $id: Int, $circuitTypeCode: String, $sub
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -69125,6 +69461,7 @@ query GetWawEvent($nameUrlSlug: String, $id: Int, $circuitTypeCode: String, $sub
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -69186,6 +69523,7 @@ query GetWawEvent($nameUrlSlug: String, $id: Int, $circuitTypeCode: String, $sub
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -69456,6 +69794,7 @@ query GetWawEvent($nameUrlSlug: String, $id: Int, $circuitTypeCode: String, $sub
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -69596,6 +69935,7 @@ query GetWawEvent($nameUrlSlug: String, $id: Int, $circuitTypeCode: String, $sub
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -69848,6 +70188,7 @@ query GetWawEvent($nameUrlSlug: String, $id: Int, $circuitTypeCode: String, $sub
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -70057,6 +70398,7 @@ query GetWawEvent($nameUrlSlug: String, $id: Int, $circuitTypeCode: String, $sub
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -70329,6 +70671,7 @@ query GetWawEvent($nameUrlSlug: String, $id: Int, $circuitTypeCode: String, $sub
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -70472,6 +70815,7 @@ query GetWawEvent($nameUrlSlug: String, $id: Int, $circuitTypeCode: String, $sub
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -70765,6 +71109,7 @@ query GetWawEvent($nameUrlSlug: String, $id: Int, $circuitTypeCode: String, $sub
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -70827,6 +71172,7 @@ query GetWawEvent($nameUrlSlug: String, $id: Int, $circuitTypeCode: String, $sub
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             fileId
@@ -70919,6 +71265,7 @@ query GetWawEvent($nameUrlSlug: String, $id: Int, $circuitTypeCode: String, $sub
         }
       }
       gatedContent
+      noIndex
       campaignId
       campaign {
         id
@@ -71748,6 +72095,7 @@ query GetWawMenu($language: String, $type: String, $relatedEventId: Int, $relate
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -72163,6 +72511,7 @@ query GetWawMenu($language: String, $type: String, $relatedEventId: Int, $relate
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -72248,6 +72597,7 @@ query GetWawMenu($language: String, $type: String, $relatedEventId: Int, $relate
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -72488,6 +72838,7 @@ query GetWawMenu($language: String, $type: String, $relatedEventId: Int, $relate
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -72631,6 +72982,7 @@ query GetWawMenu($language: String, $type: String, $relatedEventId: Int, $relate
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -72739,6 +73091,7 @@ query GetWawMenu($language: String, $type: String, $relatedEventId: Int, $relate
           }
         }
         gatedContent
+        noIndex
         campaignId
         campaign {
           id
@@ -72929,6 +73282,7 @@ query GetWawMenu($language: String, $type: String, $relatedEventId: Int, $relate
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -73344,6 +73698,7 @@ query GetWawMenu($language: String, $type: String, $relatedEventId: Int, $relate
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -73429,6 +73784,7 @@ query GetWawMenu($language: String, $type: String, $relatedEventId: Int, $relate
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -73669,6 +74025,7 @@ query GetWawMenu($language: String, $type: String, $relatedEventId: Int, $relate
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -73812,6 +74169,7 @@ query GetWawMenu($language: String, $type: String, $relatedEventId: Int, $relate
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -73920,6 +74278,7 @@ query GetWawMenu($language: String, $type: String, $relatedEventId: Int, $relate
           }
         }
         gatedContent
+        noIndex
         campaignId
         campaign {
           id
@@ -74007,6 +74366,7 @@ query GetWawMenu($language: String, $type: String, $relatedEventId: Int, $relate
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -74279,6 +74639,7 @@ query GetWawMenu($language: String, $type: String, $relatedEventId: Int, $relate
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -74422,6 +74783,7 @@ query GetWawMenu($language: String, $type: String, $relatedEventId: Int, $relate
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -74557,6 +74919,7 @@ query GetWawMenu($language: String, $type: String, $relatedEventId: Int, $relate
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -74594,6 +74957,7 @@ query GetWawMenu($language: String, $type: String, $relatedEventId: Int, $relate
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             items {
@@ -74631,7 +74995,18 @@ query ResultsByAthlete($athleteIds: [String], $countryOfResidence: String, $limi
       matchType
       place
       race
-      team
+      team {
+        name
+        country
+        teamMembers {
+          birthDate
+          country
+          iaafId
+          id
+          name
+          urlSlug
+        }
+      }
       venue
     }
     parameters {
@@ -74955,6 +75330,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -75370,6 +75746,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -75455,6 +75832,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -75695,6 +76073,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -75838,6 +76217,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -75946,6 +76326,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
           }
         }
         gatedContent
+        noIndex
         campaignId
         campaign {
           id
@@ -76290,6 +76671,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -76600,6 +76982,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -76664,6 +77047,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -76785,6 +77169,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -76961,6 +77346,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -77079,6 +77465,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -77367,6 +77754,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -77428,6 +77816,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -77698,6 +78087,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -77838,6 +78228,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -77999,6 +78390,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -78271,6 +78663,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -78414,6 +78807,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -78624,6 +79018,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -78896,6 +79291,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -79039,6 +79435,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -79346,6 +79743,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -79761,6 +80159,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             relatedCountryCodes
@@ -79846,6 +80245,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -80086,6 +80486,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -80229,6 +80630,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
           }
@@ -80337,6 +80739,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
           }
         }
         gatedContent
+        noIndex
         campaignId
         campaign {
           id
@@ -80582,6 +80985,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -80854,6 +81258,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -80997,6 +81402,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id
@@ -81157,6 +81563,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
               videoId
             }
             gatedContent
+            noIndex
             campaignId
             campaign {
               id
@@ -81266,6 +81673,7 @@ query GetPage($urlSlug: String, $relatedEventId: Int, $language: String!, $typeI
       }
     }
     gatedContent
+    noIndex
     campaignId
     campaign {
       id
@@ -81972,6 +82380,12 @@ query GetUpcomingCompetitions($today: String) {
   }
 }
 
+query SignCookies($url: String) {
+  signCookies(url: $url) {
+    signedCookies
+  }
+}
+
 query GetUserCountry {
   getUserCountry {
     ip
@@ -82354,6 +82768,7 @@ query GetRecentResults($limit: Int) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             eventStartDateTime
@@ -82626,6 +83041,7 @@ query GetRecentResults($limit: Int) {
               publishedByName
               published
               gatedContent
+              noIndex
               campaignId
             }
             minisite {
@@ -82769,6 +83185,7 @@ query GetRecentResults($limit: Int) {
             }
           }
           gatedContent
+          noIndex
           campaignId
           campaign {
             id

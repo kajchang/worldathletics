@@ -86,14 +86,14 @@ class GetAppearanceGetAppearanceDefaultSponsors(BaseModel):
     url: Optional[str]
     logo_scale: Optional[str] = Field(alias="logoScale")
     light_bg_logo_id: Optional[str] = Field(alias="lightBgLogoId")
-    light_bg_logo: Optional["GetAppearanceGetAppearanceDefaultSponsorsLightBgLogo"] = (
-        Field(alias="lightBgLogo")
-    )
+    light_bg_logo: Optional[
+        "GetAppearanceGetAppearanceDefaultSponsorsLightBgLogo"
+    ] = Field(alias="lightBgLogo")
     light_bg_logo_edited: Optional[str] = Field(alias="lightBgLogoEdited")
     dark_bg_logo_id: Optional[str] = Field(alias="darkBgLogoId")
-    dark_bg_logo: Optional["GetAppearanceGetAppearanceDefaultSponsorsDarkBgLogo"] = (
-        Field(alias="darkBgLogo")
-    )
+    dark_bg_logo: Optional[
+        "GetAppearanceGetAppearanceDefaultSponsorsDarkBgLogo"
+    ] = Field(alias="darkBgLogo")
     dark_bg_logo_edited: Optional[str] = Field(alias="darkBgLogoEdited")
 
 

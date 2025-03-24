@@ -9,9 +9,9 @@ from .base_model import BaseModel
 
 
 class GetVerification(BaseModel):
-    get_verification: Optional[List[Optional["GetVerificationGetVerification"]]] = (
-        Field(alias="getVerification")
-    )
+    get_verification: Optional[
+        List[Optional["GetVerificationGetVerification"]]
+    ] = Field(alias="getVerification")
 
 
 class GetVerificationGetVerification(BaseModel):

@@ -1,36 +1,21 @@
 """This directive allows results to be deferred during execution"""
 directive @defer on FIELD
 
-"""Tells the service which mutation triggers this subscription."""
-directive @aws_subscribe(
-  """
-  List of mutations which will trigger this subscription when they are called.
-  """
-  mutations: [String]
-) on FIELD_DEFINITION
-
-"""
-Tells the service this field/object has access authorized by an OIDC token.
-"""
-directive @aws_oidc on OBJECT | FIELD_DEFINITION
-
-"""
-Tells the service this field/object has access authorized by sigv4 signing.
-"""
-directive @aws_iam on OBJECT | FIELD_DEFINITION
-
 """
 Tells the service this field/object has access authorized by an API key.
 """
 directive @aws_api_key on OBJECT | FIELD_DEFINITION
 
 """
-Tells the service this field/object has access authorized by a Cognito User Pools token.
+Tells the service this field/object has access authorized by an OIDC token.
 """
-directive @aws_cognito_user_pools(
+directive @aws_oidc on OBJECT | FIELD_DEFINITION
+
+"""Directs the schema to enforce authorization on a field"""
+directive @aws_auth(
   """List of cognito user pool groups which have access on this field"""
   cognito_groups: [String]
-) on OBJECT | FIELD_DEFINITION
+) on FIELD_DEFINITION
 
 """
 Tells the service which subscriptions will be published to when this mutation is
@@ -43,16 +28,31 @@ directive @aws_publish(
   subscriptions: [String]
 ) on FIELD_DEFINITION
 
-"""Directs the schema to enforce authorization on a field"""
-directive @aws_auth(
+"""Tells the service which mutation triggers this subscription."""
+directive @aws_subscribe(
+  """
+  List of mutations which will trigger this subscription when they are called.
+  """
+  mutations: [String]
+) on FIELD_DEFINITION
+
+"""
+Tells the service this field/object has access authorized by a Cognito User Pools token.
+"""
+directive @aws_cognito_user_pools(
   """List of cognito user pool groups which have access on this field"""
   cognito_groups: [String]
-) on FIELD_DEFINITION
+) on OBJECT | FIELD_DEFINITION
 
 """
 Tells the service this field/object has access authorized by a Lambda Authorizer.
 """
 directive @aws_lambda on OBJECT | FIELD_DEFINITION
+
+"""
+Tells the service this field/object has access authorized by sigv4 signing.
+"""
+directive @aws_iam on OBJECT | FIELD_DEFINITION
 
 input AAapiQuery {
   disciplineCode: String
@@ -457,7 +457,7 @@ type AthleteResult {
   matchType: String
   place: String
   race: String
-  team: String
+  team: Team
   venue: String
 }
 
@@ -1727,6 +1727,17 @@ type compInformationContacts {
 type compInformationUnits {
   events: [String]
   gender: String
+}
+
+type ContactPreferences {
+  success: Boolean!
+  data: ContactPreferencesData
+  error: String
+}
+
+type ContactPreferencesData {
+  contactPreferences: [String]
+  consents: [String]
 }
 
 type Content {
@@ -3422,18 +3433,23 @@ type Mutation {
   upsertPlacingTableDetails(eventId: Int!, payload: [PlacingTableDetailInput]!): PlacingTableDetailType
   setTeamScoring(phaseId: Int!, type: String!, payload: [TeamScoringInput]!, chunk: ChunkType): TeamScoringLive
   teamStandingsMutation(unitId: Int!, type: String!, payload: [TeamStandingsInput]!, chunk: ChunkType): TeamStandingsLive
+  resendVerifyEmail(email: String!): ResendVerifyEmail
+  ultimateSignUp(email: String!, fullName: String!): UltimateSignUpResponse!
+  updateConsents(email: String, consents: [String]!): Boolean
+  updateContactPreferences(email: String, contactPreferences: [String]!): Boolean
   competitionEntry(email: String!, designersAge: String!, mascotStory: String!, mascotImage: String!, mascotName: String!, mascotImageBase64: String!, designersName: String!, competitionName: String!, verified: Boolean!): CompetitionSuccess
   removeProfile: SuccessRemoveProfile
   syncMailchimp(email: String): SuccessMailChimp
-  updateUser(firstName: String, lastName: String, nickname: String, ageGroup: String, sex: String, email: String, countryCode: String, nationalTeamSupportCountryCode: String, userTypes: [String], userSubTypes: [String], disciplineCategories: [String], interests: [String], mailingListConsent: Boolean, contactPreferences: [String], tags: [String], globalTokyoMailingListConsent: Boolean, locale: String, countryRegionCode: String): Success
+  updateUser(firstName: String, lastName: String, nickname: String, ageGroup: String, sex: String, email: String, countryCode: String, nationalTeamSupportCountryCode: String, userTypes: [String], userSubTypes: [String], disciplineCategories: [String], interests: [String], mailingListConsent: Boolean, contactPreferences: [String], consents: [String], eventsContactPreferences: [String], insideTrackContactPreferences: [String], worldAhleticsFamilyContactPreferences: [String], tags: [String], globalTokyoMailingListConsent: Boolean, locale: String, countryRegionCode: String): Success
   updateUserFollowedCompetitors(competitorId: Int): UserFollowedCompetitorsSuccess
   updateUserFollowedCountry(countryCode: String, competitionId: Int): UserFollowedCountrySuccess
   updateUserUnfollowedCountry(countryCode: String, competitionId: Int): UserFollowedCountrySuccess
   updateUserTermsAndConditions: UserTermsAndConditionsSuccess
-  register(firstName: String!, lastName: String!, email: String!, password: String!, ageGroup: String, sex: String, countryCode: String, nationalTeamSupportCountryCode: String, mailingListConsent: Boolean, globalTokyoMailingListConsent: Boolean, kidsAthleticsTermsAndConditions: String, interests: [String], userTypes: [String], userSubTypes: [String], disciplineCategories: [String], contactPreferences: [String], source: String!, tags: [String], clientMetadata: [ClientMetadataInput], nickname: String, locale: String, countryRegionCode: String): Success
+  register(firstName: String!, lastName: String!, email: String!, password: String!, ageGroup: String, sex: String, countryCode: String, nationalTeamSupportCountryCode: String, mailingListConsent: Boolean, globalTokyoMailingListConsent: Boolean, kidsAthleticsTermsAndConditions: String, interests: [String], userTypes: [String], userSubTypes: [String], disciplineCategories: [String], contactPreferences: [String], consents: [String], source: String!, tags: [String], clientMetadata: [ClientMetadataInput], nickname: String, locale: String, countryRegionCode: String): Success
   verifyEmail(confirmationCode: String!, username: String!): SuccessVerifyEmail
   liveBlogPostUpdated(id: String!): LiveBlogPostsUpdate
   sendSpikesEmail(email: String!, firstName: String!, lastName: String!, emailMessage: String!, emailText: String!): SendSpikesEmailSuccess
+  sendContactUsEmail(email: String!, name: String!, message: String!): sendContactUsEmailSuccess
   voting(voteIds: [String], userCognitoId: String, voteOptionsIds: [String]): SuccessVoting
 }
 
@@ -3598,6 +3614,7 @@ type Page {
   published: AWSDateTime
   contentModules: [PageModules]
   gatedContent: Boolean
+  noIndex: Boolean
   campaignId: String
   campaign: Campaign
 }
@@ -3992,6 +4009,7 @@ type Query {
   teamProfile(input: TeamQuery!, field: String!): TeamProfile
   getTeamScoring(phaseId: Int!, type: String!, teamCountryCode: String): [TeamScoring]
   teamStandings(unitId: Int!, type: String!, teamCountryCode: String, competitionIntermediateOrder: Int): [TeamStandings]
+  getContactPreferences(email_id: String!): ContactPreferences
   getCampaigns: [CampaignToRemove]
   getCampaign(tag: String!): Campaign
   verifyCaptchaToken(token: String!): CaptchaResponse
@@ -4099,6 +4117,7 @@ type Query {
   getTopRankings(limit: Int, all: Boolean): TopRankings
   getTopPanel: [TopPanel]
   getUpcomingCompetitions(today: String): [UpcomingCompetitions]
+  signCookies(url: String): SignedCookies
   getUserCountry: UserCountryData
   getVideoList(limit: Int, offset: Int, language: String, playlistId: String, type: String, slug: String, isRelatedVideos: Boolean): [VideoPublished]
   getVideoById(contentId: String!, language: String): VideoPublished
@@ -4300,6 +4319,11 @@ type representativeType {
   website: [String]
 }
 
+type ResendVerifyEmail {
+  isSuccess: Boolean
+  error: String
+}
+
 type Response {
   status: Int
   message: String
@@ -4463,6 +4487,10 @@ type SectionsObj {
   links: [LinksObj]
 }
 
+type sendContactUsEmailSuccess {
+  status: Int
+}
+
 type SendSpikesEmailSuccess {
   status: Int
 }
@@ -4493,7 +4521,12 @@ type seriesAttempt {
   intermediateMark: String
   intermediateWind: String
   competitionIntermediateName: String
+  competitionIntermediateOrder: Int
   intermediateGap: String
+}
+
+type SignedCookies {
+  signedCookies: String
 }
 
 type singleCompetitor {
@@ -4750,6 +4783,12 @@ type SyncMailchimp {
   email: String
 }
 
+type Team {
+  name: String
+  country: String
+  teamMembers: [AthleteData]
+}
+
 type TeamMembersResult {
   name: String
   urlSlug: String
@@ -4971,6 +5010,12 @@ type TrendingAthletes {
   primaryMedia: [Media]
 }
 
+type UltimateSignUpResponse {
+  statusCode: Int!
+  body: String
+  responseCode: Int
+}
+
 type UndeterminedCompetitionPeriod {
   status: String
   label: String
@@ -5076,6 +5121,10 @@ type UserSettings {
   disciplineCategories: [String]
   interests: [String]
   contactPreferences: [String]
+  consents: [String]
+  eventsContactPreferences: [String]
+  insideTrackContactPreferences: [String]
+  worldAhleticsFamilyContactPreferences: [String]
   source: String
   tags: [String]
   followedCompetitors: [Int]

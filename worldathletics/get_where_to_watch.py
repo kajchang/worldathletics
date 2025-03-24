@@ -9,9 +9,9 @@ from .base_model import BaseModel
 
 
 class GetWhereToWatch(BaseModel):
-    get_where_to_watch: Optional[List[Optional["GetWhereToWatchGetWhereToWatch"]]] = (
-        Field(alias="getWhereToWatch")
-    )
+    get_where_to_watch: Optional[
+        List[Optional["GetWhereToWatchGetWhereToWatch"]]
+    ] = Field(alias="getWhereToWatch")
 
 
 class GetWhereToWatchGetWhereToWatch(BaseModel):

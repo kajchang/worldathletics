@@ -9,9 +9,9 @@ from .base_model import BaseModel
 
 
 class CompetitionsByCountry(BaseModel):
-    competitions_by_country: Optional["CompetitionsByCountryCompetitionsByCountry"] = (
-        Field(alias="competitionsByCountry")
-    )
+    competitions_by_country: Optional[
+        "CompetitionsByCountryCompetitionsByCountry"
+    ] = Field(alias="competitionsByCountry")
 
 
 class CompetitionsByCountryCompetitionsByCountry(BaseModel):

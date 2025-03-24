@@ -9,9 +9,9 @@ from .base_model import BaseModel
 
 
 class GetVideoPlaylist(BaseModel):
-    get_video_playlist: Optional[List[Optional["GetVideoPlaylistGetVideoPlaylist"]]] = (
-        Field(alias="getVideoPlaylist")
-    )
+    get_video_playlist: Optional[
+        List[Optional["GetVideoPlaylistGetVideoPlaylist"]]
+    ] = Field(alias="getVideoPlaylist")
 
 
 class GetVideoPlaylistGetVideoPlaylist(BaseModel):

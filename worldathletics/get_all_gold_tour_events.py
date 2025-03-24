@@ -9,9 +9,9 @@ from .base_model import BaseModel
 
 
 class GetAllGoldTourEvents(BaseModel):
-    get_all_gold_tour_events: Optional["GetAllGoldTourEventsGetAllGoldTourEvents"] = (
-        Field(alias="getAllGoldTourEvents")
-    )
+    get_all_gold_tour_events: Optional[
+        "GetAllGoldTourEventsGetAllGoldTourEvents"
+    ] = Field(alias="getAllGoldTourEvents")
 
 
 class GetAllGoldTourEventsGetAllGoldTourEvents(BaseModel):

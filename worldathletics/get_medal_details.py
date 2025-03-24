@@ -9,9 +9,9 @@ from .base_model import BaseModel
 
 
 class GetMedalDetails(BaseModel):
-    get_medal_details: Optional[List[Optional["GetMedalDetailsGetMedalDetails"]]] = (
-        Field(alias="getMedalDetails")
-    )
+    get_medal_details: Optional[
+        List[Optional["GetMedalDetailsGetMedalDetails"]]
+    ] = Field(alias="getMedalDetails")
 
 
 class GetMedalDetailsGetMedalDetails(BaseModel):

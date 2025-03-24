@@ -9,9 +9,9 @@ from .base_model import BaseModel
 
 
 class GetAllSchedules(BaseModel):
-    get_all_schedules: Optional[List[Optional["GetAllSchedulesGetAllSchedules"]]] = (
-        Field(alias="getAllSchedules")
-    )
+    get_all_schedules: Optional[
+        List[Optional["GetAllSchedulesGetAllSchedules"]]
+    ] = Field(alias="getAllSchedules")
 
 
 class GetAllSchedulesGetAllSchedules(BaseModel):

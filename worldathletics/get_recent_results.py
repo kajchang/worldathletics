@@ -103,6 +103,7 @@ class GetRecentResultsGetRecentResultsResultsEventPage(BaseModel):
         List[Optional["GetRecentResultsGetRecentResultsResultsEventPageContentModules"]]
     ] = Field(alias="contentModules")
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
     campaign: Optional["GetRecentResultsGetRecentResultsResultsEventPageCampaign"]
 
@@ -175,6 +176,7 @@ class GetRecentResultsGetRecentResultsResultsEventPageEventPage(BaseModel):
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 
@@ -650,6 +652,7 @@ class GetRecentResultsGetRecentResultsResultsEventPageContentModulesMinisitePage
     published_by_name: Optional[str] = Field(alias="publishedByName")
     published: Optional[Any]
     gated_content: Optional[bool] = Field(alias="gatedContent")
+    no_index: Optional[bool] = Field(alias="noIndex")
     campaign_id: Optional[str] = Field(alias="campaignId")
 
 

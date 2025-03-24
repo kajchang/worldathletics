@@ -68,6 +68,7 @@ from .get_competition_organiser_info import GetCompetitionOrganiserInfo
 from .get_competitor import GetCompetitor
 from .get_competitor_aa_id import GetCompetitorAAId
 from .get_competitors_legacy_primary_media import GetCompetitorsLegacyPrimaryMedia
+from .get_contact_preferences import GetContactPreferences
 from .get_countries import GetCountries
 from .get_discipline import GetDiscipline
 from .get_drafted_article import GetDraftedArticle
@@ -192,6 +193,7 @@ from .records_by_event import RecordsByEvent
 from .results_by_athlete import ResultsByAthlete
 from .search_athletes import SearchAthletes
 from .search_competitors import SearchCompetitors
+from .sign_cookies import SignCookies
 from .team_profile import TeamProfile
 from .team_standings import TeamStandings
 from .verify_captcha_token import VerifyCaptchaToken
@@ -2204,6 +2206,33 @@ class WorldAthletics(AsyncBaseClient):
         data = self.get_data(response)
         return TeamStandings.model_validate(data)
 
+    async def get_contact_preferences(
+        self, email_id: str, **kwargs: Any
+    ) -> GetContactPreferences:
+        query = gql(
+            """
+            query GetContactPreferences($email_id: String!) {
+              getContactPreferences(email_id: $email_id) {
+                success
+                data {
+                  contactPreferences
+                  consents
+                }
+                error
+              }
+            }
+            """
+        )
+        variables: Dict[str, object] = {"email_id": email_id}
+        response = await self.execute(
+            query=query,
+            operation_name="GetContactPreferences",
+            variables=variables,
+            **kwargs
+        )
+        data = self.get_data(response)
+        return GetContactPreferences.model_validate(data)
+
     async def get_campaigns(self, **kwargs: Any) -> GetCampaigns:
         query = gql(
             """
@@ -2338,6 +2367,10 @@ class WorldAthletics(AsyncBaseClient):
                   disciplineCategories
                   interests
                   contactPreferences
+                  consents
+                  eventsContactPreferences
+                  insideTrackContactPreferences
+                  worldAhleticsFamilyContactPreferences
                   source
                   tags
                   followedCompetitors
@@ -3234,6 +3267,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -3383,6 +3417,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -3447,6 +3482,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -3568,6 +3604,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -3832,6 +3869,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -4011,6 +4049,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -4101,6 +4140,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -4373,6 +4413,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -4516,6 +4557,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -4732,6 +4774,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -5004,6 +5047,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -5147,6 +5191,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -5278,6 +5323,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -5550,6 +5596,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -5693,6 +5740,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -5881,6 +5929,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -6296,6 +6345,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -6381,6 +6431,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -6621,6 +6672,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -6764,6 +6816,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -6872,6 +6925,7 @@ class WorldAthletics(AsyncBaseClient):
                       }
                     }
                     gatedContent
+                    noIndex
                     campaignId
                     campaign {
                       id
@@ -7485,6 +7539,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -7634,6 +7689,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -7698,6 +7754,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -7819,6 +7876,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -8083,6 +8141,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -8262,6 +8321,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -8352,6 +8412,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -8624,6 +8685,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -8767,6 +8829,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -8983,6 +9046,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -9255,6 +9319,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -9398,6 +9463,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -9529,6 +9595,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -9801,6 +9868,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -9944,6 +10012,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -10132,6 +10201,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -10547,6 +10617,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -10632,6 +10703,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -10872,6 +10944,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -11015,6 +11088,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -11123,6 +11197,7 @@ class WorldAthletics(AsyncBaseClient):
                       }
                     }
                     gatedContent
+                    noIndex
                     campaignId
                     campaign {
                       id
@@ -11468,6 +11543,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -11883,6 +11959,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -11968,6 +12045,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -12208,6 +12286,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -12351,6 +12430,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -12459,6 +12539,7 @@ class WorldAthletics(AsyncBaseClient):
                       }
                     }
                     gatedContent
+                    noIndex
                     campaignId
                     campaign {
                       id
@@ -12853,6 +12934,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -13125,6 +13207,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -13268,6 +13351,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -13399,6 +13483,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -13671,6 +13756,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -13814,6 +13900,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -14002,6 +14089,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -14417,6 +14505,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -14502,6 +14591,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -14742,6 +14832,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -14885,6 +14976,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -14993,6 +15085,7 @@ class WorldAthletics(AsyncBaseClient):
                       }
                     }
                     gatedContent
+                    noIndex
                     campaignId
                     campaign {
                       id
@@ -15219,6 +15312,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -15634,6 +15728,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -15719,6 +15814,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -15959,6 +16055,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -16102,6 +16199,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -16210,6 +16308,7 @@ class WorldAthletics(AsyncBaseClient):
                       }
                     }
                     gatedContent
+                    noIndex
                     campaignId
                     campaign {
                       id
@@ -16378,6 +16477,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -16650,6 +16750,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -16793,6 +16894,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -17229,6 +17331,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -17408,6 +17511,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -17498,6 +17602,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -17770,6 +17875,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -17913,6 +18019,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -18041,6 +18148,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -18313,6 +18421,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -18456,6 +18565,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -18672,6 +18782,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -18982,6 +19093,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -19046,6 +19158,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -19167,6 +19280,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -19343,6 +19457,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -19461,6 +19576,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -19749,6 +19865,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -19810,6 +19927,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -20080,6 +20198,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -20220,6 +20339,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -20381,6 +20501,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -20653,6 +20774,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -20796,6 +20918,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -21061,6 +21184,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -21476,6 +21600,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -21561,6 +21686,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -21801,6 +21927,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -21944,6 +22071,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -22052,6 +22180,7 @@ class WorldAthletics(AsyncBaseClient):
                       }
                     }
                     gatedContent
+                    noIndex
                     campaignId
                     campaign {
                       id
@@ -22269,6 +22398,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -22541,6 +22671,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -22684,6 +22815,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -22930,6 +23062,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -23218,6 +23351,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -23279,6 +23413,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -23549,6 +23684,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -23689,6 +23825,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -23941,6 +24078,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -24150,6 +24288,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -24422,6 +24561,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -24565,6 +24705,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -24858,6 +24999,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -24920,6 +25062,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         fileId
@@ -25012,6 +25155,7 @@ class WorldAthletics(AsyncBaseClient):
                     }
                   }
                   gatedContent
+                  noIndex
                   campaignId
                   campaign {
                     id
@@ -25397,6 +25541,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -25812,6 +25957,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -25897,6 +26043,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -26137,6 +26284,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -26280,6 +26428,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -26388,6 +26537,7 @@ class WorldAthletics(AsyncBaseClient):
                       }
                     }
                     gatedContent
+                    noIndex
                     campaignId
                     campaign {
                       id
@@ -26782,6 +26932,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -27054,6 +27205,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -27197,6 +27349,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -27328,6 +27481,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -27600,6 +27754,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -27743,6 +27898,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -27931,6 +28087,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -28346,6 +28503,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -28431,6 +28589,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -28671,6 +28830,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -28814,6 +28974,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -28922,6 +29083,7 @@ class WorldAthletics(AsyncBaseClient):
                       }
                     }
                     gatedContent
+                    noIndex
                     campaignId
                     campaign {
                       id
@@ -29148,6 +29310,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -29563,6 +29726,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -29648,6 +29812,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -29888,6 +30053,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -30031,6 +30197,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -30139,6 +30306,7 @@ class WorldAthletics(AsyncBaseClient):
                       }
                     }
                     gatedContent
+                    noIndex
                     campaignId
                     campaign {
                       id
@@ -30307,6 +30475,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -30579,6 +30748,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -30722,6 +30892,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -31158,6 +31329,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -31337,6 +31509,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -31427,6 +31600,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -31699,6 +31873,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -31842,6 +32017,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -31970,6 +32146,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -32242,6 +32419,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -32385,6 +32563,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -32601,6 +32780,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -32911,6 +33091,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -32975,6 +33156,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -33096,6 +33278,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -33272,6 +33455,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -33390,6 +33574,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -33678,6 +33863,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -33739,6 +33925,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -34009,6 +34196,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -34149,6 +34337,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -34310,6 +34499,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -34582,6 +34772,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -34725,6 +34916,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -34990,6 +35182,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -35405,6 +35598,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -35490,6 +35684,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -35730,6 +35925,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -35873,6 +36069,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -35981,6 +36178,7 @@ class WorldAthletics(AsyncBaseClient):
                       }
                     }
                     gatedContent
+                    noIndex
                     campaignId
                     campaign {
                       id
@@ -36198,6 +36396,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -36470,6 +36669,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -36613,6 +36813,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -36859,6 +37060,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -37147,6 +37349,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -37208,6 +37411,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -37478,6 +37682,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -37618,6 +37823,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -37870,6 +38076,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -38079,6 +38286,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -38351,6 +38559,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -38494,6 +38703,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -38787,6 +38997,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -38849,6 +39060,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         fileId
@@ -38941,6 +39153,7 @@ class WorldAthletics(AsyncBaseClient):
                     }
                   }
                   gatedContent
+                  noIndex
                   campaignId
                   campaign {
                     id
@@ -39303,6 +39516,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -39718,6 +39932,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -39803,6 +40018,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -40043,6 +40259,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -40186,6 +40403,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -40294,6 +40512,7 @@ class WorldAthletics(AsyncBaseClient):
                       }
                     }
                     gatedContent
+                    noIndex
                     campaignId
                     campaign {
                       id
@@ -40688,6 +40907,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -40960,6 +41180,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -41103,6 +41324,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -41234,6 +41456,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -41506,6 +41729,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -41649,6 +41873,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -41837,6 +42062,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -42252,6 +42478,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -42337,6 +42564,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -42577,6 +42805,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -42720,6 +42949,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -42828,6 +43058,7 @@ class WorldAthletics(AsyncBaseClient):
                       }
                     }
                     gatedContent
+                    noIndex
                     campaignId
                     campaign {
                       id
@@ -43054,6 +43285,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -43469,6 +43701,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -43554,6 +43787,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -43794,6 +44028,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -43937,6 +44172,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -44045,6 +44281,7 @@ class WorldAthletics(AsyncBaseClient):
                       }
                     }
                     gatedContent
+                    noIndex
                     campaignId
                     campaign {
                       id
@@ -44213,6 +44450,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -44485,6 +44723,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -44628,6 +44867,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -45064,6 +45304,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -45243,6 +45484,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -45333,6 +45575,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -45605,6 +45848,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -45748,6 +45992,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -45876,6 +46121,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -46148,6 +46394,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -46291,6 +46538,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -46507,6 +46755,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -46817,6 +47066,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -46881,6 +47131,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -47002,6 +47253,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -47178,6 +47430,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -47296,6 +47549,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -47584,6 +47838,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -47645,6 +47900,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -47915,6 +48171,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -48055,6 +48312,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -48216,6 +48474,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -48488,6 +48747,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -48631,6 +48891,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -48896,6 +49157,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -49311,6 +49573,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -49396,6 +49659,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -49636,6 +49900,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -49779,6 +50044,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -49887,6 +50153,7 @@ class WorldAthletics(AsyncBaseClient):
                       }
                     }
                     gatedContent
+                    noIndex
                     campaignId
                     campaign {
                       id
@@ -50104,6 +50371,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -50376,6 +50644,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -50519,6 +50788,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -50765,6 +51035,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -51053,6 +51324,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -51114,6 +51386,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -51384,6 +51657,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -51524,6 +51798,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -51776,6 +52051,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -51985,6 +52261,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -52257,6 +52534,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -52400,6 +52678,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -52693,6 +52972,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -52755,6 +53035,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         fileId
@@ -52847,6 +53128,7 @@ class WorldAthletics(AsyncBaseClient):
                     }
                   }
                   gatedContent
+                  noIndex
                   campaignId
                   campaign {
                     id
@@ -54544,6 +54826,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -54816,6 +55099,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -54959,6 +55243,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -55090,6 +55375,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -55362,6 +55648,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -55505,6 +55792,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -55693,6 +55981,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -56108,6 +56397,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -56193,6 +56483,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -56433,6 +56724,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -56576,6 +56868,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -56684,6 +56977,7 @@ class WorldAthletics(AsyncBaseClient):
                       }
                     }
                     gatedContent
+                    noIndex
                     campaignId
                     campaign {
                       id
@@ -56828,6 +57122,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -57100,6 +57395,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -57243,6 +57539,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -57374,6 +57671,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -57646,6 +57944,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -57789,6 +58088,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -57977,6 +58277,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -58392,6 +58693,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -58477,6 +58779,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -58717,6 +59020,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -58860,6 +59164,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -58968,6 +59273,7 @@ class WorldAthletics(AsyncBaseClient):
                       }
                     }
                     gatedContent
+                    noIndex
                     campaignId
                     campaign {
                       id
@@ -59269,6 +59575,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -59684,6 +59991,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -59769,6 +60077,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -60009,6 +60318,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -60152,6 +60462,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -60260,6 +60571,7 @@ class WorldAthletics(AsyncBaseClient):
                       }
                     }
                     gatedContent
+                    noIndex
                     campaignId
                     campaign {
                       id
@@ -60489,6 +60801,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -60904,6 +61217,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -60989,6 +61303,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -61229,6 +61544,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -61372,6 +61688,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -61480,6 +61797,7 @@ class WorldAthletics(AsyncBaseClient):
                       }
                     }
                     gatedContent
+                    noIndex
                     campaignId
                     campaign {
                       id
@@ -61620,6 +61938,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -61892,6 +62211,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -62035,6 +62355,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -62281,6 +62602,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -62569,6 +62891,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -62630,6 +62953,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -62900,6 +63224,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -63040,6 +63365,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -63292,6 +63618,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -63501,6 +63828,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -63773,6 +64101,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -63916,6 +64245,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -64209,6 +64539,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -64271,6 +64602,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         fileId
@@ -64363,6 +64695,7 @@ class WorldAthletics(AsyncBaseClient):
                     }
                   }
                   gatedContent
+                  noIndex
                   campaignId
                   campaign {
                     id
@@ -66218,6 +66551,7 @@ class WorldAthletics(AsyncBaseClient):
                       intermediateMark
                       intermediateWind
                       competitionIntermediateName
+                      competitionIntermediateOrder
                       intermediateGap
                     }
                   }
@@ -67147,6 +67481,7 @@ class WorldAthletics(AsyncBaseClient):
                       intermediateMark
                       intermediateWind
                       competitionIntermediateName
+                      competitionIntermediateOrder
                       intermediateGap
                     }
                   }
@@ -67439,6 +67774,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -67711,6 +68047,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -67854,6 +68191,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -68100,6 +68438,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -68388,6 +68727,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -68449,6 +68789,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -68719,6 +69060,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -68859,6 +69201,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -69111,6 +69454,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -69320,6 +69664,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -69592,6 +69937,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -69735,6 +70081,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -70028,6 +70375,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -70090,6 +70438,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         fileId
@@ -70182,6 +70531,7 @@ class WorldAthletics(AsyncBaseClient):
                     }
                   }
                   gatedContent
+                  noIndex
                   campaignId
                   campaign {
                     id
@@ -70398,6 +70748,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -70670,6 +71021,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -70813,6 +71165,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -71059,6 +71412,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -71347,6 +71701,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -71408,6 +71763,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -71678,6 +72034,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -71818,6 +72175,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -72070,6 +72428,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -72279,6 +72638,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -72551,6 +72911,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -72694,6 +73055,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -72987,6 +73349,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -73049,6 +73412,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         fileId
@@ -73141,6 +73505,7 @@ class WorldAthletics(AsyncBaseClient):
                     }
                   }
                   gatedContent
+                  noIndex
                   campaignId
                   campaign {
                     id
@@ -74336,6 +74701,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -74751,6 +75117,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -74836,6 +75203,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -75076,6 +75444,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -75219,6 +75588,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -75327,6 +75697,7 @@ class WorldAthletics(AsyncBaseClient):
                       }
                     }
                     gatedContent
+                    noIndex
                     campaignId
                     campaign {
                       id
@@ -75517,6 +75888,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -75932,6 +76304,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -76017,6 +76390,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -76257,6 +76631,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -76400,6 +76775,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -76508,6 +76884,7 @@ class WorldAthletics(AsyncBaseClient):
                       }
                     }
                     gatedContent
+                    noIndex
                     campaignId
                     campaign {
                       id
@@ -76595,6 +76972,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -76867,6 +77245,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -77010,6 +77389,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -77145,6 +77525,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -77182,6 +77563,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         items {
@@ -77243,7 +77625,18 @@ class WorldAthletics(AsyncBaseClient):
                   matchType
                   place
                   race
-                  team
+                  team {
+                    name
+                    country
+                    teamMembers {
+                      birthDate
+                      country
+                      iaafId
+                      id
+                      name
+                      urlSlug
+                    }
+                  }
                   venue
                 }
                 parameters {
@@ -77654,6 +78047,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -78069,6 +78463,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -78154,6 +78549,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -78394,6 +78790,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -78537,6 +78934,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -78645,6 +79043,7 @@ class WorldAthletics(AsyncBaseClient):
                       }
                     }
                     gatedContent
+                    noIndex
                     campaignId
                     campaign {
                       id
@@ -78989,6 +79388,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -79299,6 +79699,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -79363,6 +79764,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -79484,6 +79886,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -79660,6 +80063,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -79778,6 +80182,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -80066,6 +80471,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -80127,6 +80533,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -80397,6 +80804,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -80537,6 +80945,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -80698,6 +81107,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -80970,6 +81380,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -81113,6 +81524,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -81323,6 +81735,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -81595,6 +82008,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -81738,6 +82152,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -82045,6 +82460,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -82460,6 +82876,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         relatedCountryCodes
@@ -82545,6 +82962,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -82785,6 +83203,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -82928,6 +83347,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                       }
@@ -83036,6 +83456,7 @@ class WorldAthletics(AsyncBaseClient):
                       }
                     }
                     gatedContent
+                    noIndex
                     campaignId
                     campaign {
                       id
@@ -83281,6 +83702,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -83553,6 +83975,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -83696,6 +84119,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id
@@ -83856,6 +84280,7 @@ class WorldAthletics(AsyncBaseClient):
                           videoId
                         }
                         gatedContent
+                        noIndex
                         campaignId
                         campaign {
                           id
@@ -83965,6 +84390,7 @@ class WorldAthletics(AsyncBaseClient):
                   }
                 }
                 gatedContent
+                noIndex
                 campaignId
                 campaign {
                   id
@@ -85004,6 +85430,25 @@ class WorldAthletics(AsyncBaseClient):
         data = self.get_data(response)
         return GetUpcomingCompetitions.model_validate(data)
 
+    async def sign_cookies(
+        self, url: Union[Optional[str], UnsetType] = UNSET, **kwargs: Any
+    ) -> SignCookies:
+        query = gql(
+            """
+            query SignCookies($url: String) {
+              signCookies(url: $url) {
+                signedCookies
+              }
+            }
+            """
+        )
+        variables: Dict[str, object] = {"url": url}
+        response = await self.execute(
+            query=query, operation_name="SignCookies", variables=variables, **kwargs
+        )
+        data = self.get_data(response)
+        return SignCookies.model_validate(data)
+
     async def get_user_country(self, **kwargs: Any) -> GetUserCountry:
         query = gql(
             """
@@ -85594,6 +86039,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         eventStartDateTime
@@ -85866,6 +86312,7 @@ class WorldAthletics(AsyncBaseClient):
                           publishedByName
                           published
                           gatedContent
+                          noIndex
                           campaignId
                         }
                         minisite {
@@ -86009,6 +86456,7 @@ class WorldAthletics(AsyncBaseClient):
                         }
                       }
                       gatedContent
+                      noIndex
                       campaignId
                       campaign {
                         id

@@ -46,6 +46,16 @@ class GetUserGetUserSettings(BaseModel):
     contact_preferences: Optional[List[Optional[str]]] = Field(
         alias="contactPreferences"
     )
+    consents: Optional[List[Optional[str]]]
+    events_contact_preferences: Optional[List[Optional[str]]] = Field(
+        alias="eventsContactPreferences"
+    )
+    inside_track_contact_preferences: Optional[List[Optional[str]]] = Field(
+        alias="insideTrackContactPreferences"
+    )
+    world_ahletics_family_contact_preferences: Optional[List[Optional[str]]] = Field(
+        alias="worldAhleticsFamilyContactPreferences"
+    )
     source: Optional[str]
     tags: Optional[List[Optional[str]]]
     followed_competitors: Optional[List[Optional[int]]] = Field(

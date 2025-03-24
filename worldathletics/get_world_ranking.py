@@ -9,9 +9,9 @@ from .base_model import BaseModel
 
 
 class GetWorldRanking(BaseModel):
-    get_world_ranking: Optional[List[Optional["GetWorldRankingGetWorldRanking"]]] = (
-        Field(alias="getWorldRanking")
-    )
+    get_world_ranking: Optional[
+        List[Optional["GetWorldRankingGetWorldRanking"]]
+    ] = Field(alias="getWorldRanking")
 
 
 class GetWorldRankingGetWorldRanking(BaseModel):
